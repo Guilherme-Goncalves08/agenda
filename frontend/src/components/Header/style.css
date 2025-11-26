@@ -1,0 +1,10 @@
+header {
+    background-color: #90BA12;
+    color: white;
+    padding: 1em;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center; /* Alinhar Verticalmente | */
+    justify-content: center; /* Alinhar Horizontalmente -- */
+}
