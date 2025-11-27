@@ -1,10 +1,10 @@
-import ServiceAgenda from '../service/agenda.js'
+import ServiceCliente from '../service/cliente.js'
 
-class ControllerAgenda {
+class ControllerCliente {
     
     async FindAll(_, res) {
         try {
-            const clientes = await ServiceAgenda.FindAll()
+            const clientes = await ServiceCliente.FindAll()
             res.status(200).send({ clientes })
         } catch (error) {
             res.status(500).send({ error: error.message })
@@ -15,7 +15,7 @@ class ControllerAgenda {
         try {
             const id = req.params.id || req.headers?.cliente?.id
 
-            const cliente = await ServiceAgenda.FindOne(id)
+            const cliente = await ServiceCliente.FindOne(id)
             res.status(200).send({ cliente })
         } catch (error) {
             res.status(500).send({ error: error.message })
@@ -30,7 +30,7 @@ class ControllerAgenda {
             //     permissao = req.body.permissao
             // }
             const { nome, email, senha, ativo } = req.body
-            await ServiceAgenda.Create(nome, email, senha, ativo)
+            await ServiceCliente.Create(nome, email, senha, ativo)
             res.status(201).send()
         } catch (error) {
             res.status(500).send({ error: error.message })
@@ -41,7 +41,7 @@ class ControllerAgenda {
         try {
             const id = req.params.id || req.headers?.cliente?.id
             const nome = req.body.nome
-            ServiceAgenda.Update(id, nome)
+            ServiceCliente.Update(id, nome)
             res.status(200).send()
         } catch (error) {
             res.status(500).send({ error: error.message })
@@ -51,7 +51,7 @@ class ControllerAgenda {
     async Delete(req, res) {
         try {
             const id = req.params.id || req.headers?.cliente?.id
-            await ServiceAgenda.Delete(id)
+            await ServiceCliente.Delete(id)
             res.status(204).send()
         } catch (error) {
             res.status(500).send({ error: error.message })
@@ -62,7 +62,7 @@ class ControllerAgenda {
         try {
             const { email, senha } = req.body
 
-            const token = await ServiceAgenda.Login(email, senha)
+            const token = await ServiceCliente.Login(email, senha)
 
             res.status(200).send({ token })
         } catch (error) {
@@ -71,4 +71,4 @@ class ControllerAgenda {
     }
 
 }
-export default new ControllerAgenda()
+export default new ControllerCliente()

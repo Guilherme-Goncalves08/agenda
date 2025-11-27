@@ -1,11 +1,11 @@
-import Cliente from '../model/agenda.js'
+import Cliente from '../model/cliente.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
 const JWT_SEGREDO = "M3uS3gr3d0"
 const SALT = 10 // 12
 
-class ServiceAgenda {
+class ServiceCliente {
 
     async FindAll() {
         return Cliente.findAll()
@@ -26,7 +26,7 @@ class ServiceAgenda {
         return user
     }
 
-    async Create(nome, email, senha, ativo, permissao) {
+    async Create(nome, email, senha, ativo, ) {
         if (!nome || !email || !senha) {
             throw new Error("favor preencher todos os campos")
         }
@@ -37,20 +37,19 @@ class ServiceAgenda {
             nome,
             email,
             senha: senhaCrip,
-            ativo,
-            permissao
+            ativo
         })
     }
 
     async Update(id, nome, senha) {
         const oldUser = await Cliente.findByPk(id)
-        // oldUser.nome = nome || oldUser.nome
+        oldUser.nome = nome || oldUser.nome
 
         oldUser.senha = senha
             ? await bcrypt.hash(String(senha), SALT)
             : oldUser.senha
 
-        // Cliente.update(id, nome)
+        Cliente.update(id, nome)
     }
 
     async Delete(id) {
@@ -66,19 +65,19 @@ class ServiceAgenda {
 
         const user = await Cliente.findOne({ where: { email } })
 
-        if (
-            !user
-            || !(await bcrypt.compare(String(senha), user.senha))
-        ) {
-            throw new Error("Email ou senha inválidos.")
-        }
+        // if (
+        //     !user
+        //     || !(await bcrypt.compare(String(senha), user.senha))
+        // ) {
+        //     throw new Error("Email ou senha inválidos.")
+        // }
 
         return jwt.sign(
-            { id: user.id, nome: user.nome, permissao: user.permissao },
+            { id: user.id, nome: user.nome},
             JWT_SEGREDO,
             { expiresIn: 60 * 60 }
         )
     }
 }
 
-export default new ServiceAgenda()
+export default new ServiceCliente()

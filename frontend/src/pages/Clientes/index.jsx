@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 
 function Cliente() {
     const navigate = useNavigate()
-    const [users, setUsers] = useState([])
+    const [conteudo, setUsers] = useState([])
 
     const handleUpdate = async (user) => {
         navigate('/update/cliente', { state: { user } })
@@ -25,8 +25,8 @@ function Cliente() {
 
     useEffect(() => {
         async function carregar() {
-            const allUsers = await getCliente()
-            setUsers(allUsers)
+            const allClientes = await getCliente()
+            setUsers(allClientes)
         }
         carregar()
     }, [])
@@ -49,18 +49,18 @@ function Cliente() {
                         ? <div className='user'>
                             <label>Não tem ngm</label>
                         </div>
-                        : users.map(user =>
-                            <div className='user' key={user.id}>
-                                <label>{user.nome}</label>
-                                <label>{user.email}</label>
+                        : conteudo.map(cliente =>
+                            <div className='user' key={cliente.id}>
+                                <label>{cliente.nome}</label>
+                                <label>{cliente.email}</label>
                                 <div className='actions'>
                                     <button
                                         type='button'
-                                        onClick={() => handleUpdate(user)}
+                                        onClick={() => handleUpdate(cliente)}
                                     >Alterar</button>
                                     <button
                                         type='button'
-                                        onClick={() => handleDelete(user.id)}
+                                        onClick={() => handleDelete(cliente.id)}
                                     >Deleta</button>
                                 </div>
                             </div>)

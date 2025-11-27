@@ -9,7 +9,7 @@ export default function Header() {
 
     return (
         <header>
-            <h1>Minha API</h1>
+            <h1>Agenda</h1>
             <nav>
                 <Link to='/'>
                     <button>
@@ -28,6 +28,11 @@ export default function Header() {
                 <Link to='/login'>
                     <button>
                         Login
+                    </button>
+                </Link>
+                <Link to='/Atendimento'>
+                    <button>
+                        Atendimento
                     </button>
                 </Link>
             </nav>
