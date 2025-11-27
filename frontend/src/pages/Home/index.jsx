@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 function Home() {
     return (
         <div className="home">
-            Outras informações e um
+            Logue para continuar
             {/* <Link to='/rick-and-morty'>
                 <button>
                     Navegar para API

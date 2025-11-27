@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken'
-import ServiceAgenda from '../service/agenda.js'
+import ServiceCliente from '../service/cliente.js'
 const JWT_SEGREDO = "M3uS3gr3d0"
 
-export default function authMiddleware(roles = []) {
+export default function authMiddleware() {
     return async (req, res, next) => {
         try {
             const token = req.headers['authorization']
@@ -11,7 +11,7 @@ export default function authMiddleware(roles = []) {
             }
             const decoded = jwt.verify(token.split(' ')[1], JWT_SEGREDO)
 
-            const cliente = await ServiceAgenda.FindOne(decoded.id)
+            const cliente = await ServiceCliente.FindOne(decoded.id)
 
             // if(
             //     roles.length && 

@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import router from './router/agenda.js';
+import router from './router/cliente.js';
 import database from './config/database.js'
 
 const app = express();

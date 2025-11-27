@@ -13,12 +13,12 @@ const INITIAL_STATE = {
 
 export default function CreateCliente() {
     const navigate = useNavigate()
-    const [user, setUser] = useState(INITIAL_STATE)
+    const [cliente, setUser] = useState(INITIAL_STATE)
 
     const handleChange = (e) => {
         const { id, value } = e.target;
         setUser({
-            ...user,
+            ...cliente,
             [id]: value
         })
     }
@@ -31,7 +31,7 @@ export default function CreateCliente() {
     const handleSave = async (e) => {
         e.preventDefault()
         // seria idela validar os valores do objeto antes de enviar
-        const response = await createCliente(user)
+        const response = await createCliente(cliente)
 
         if (response.status === 201) {
             toast("Usuário criado com sucesso")
@@ -47,15 +47,15 @@ export default function CreateCliente() {
             <form>
                 <div>
                     <label>Nome: </label>
-                    <input type="text" name="nome" id='nome' value={user.nome} onChange={handleChange} />
+                    <input type="text" name="nome" id='nome' value={cliente.nome} onChange={handleChange} />
                 </div>
                 <div>
                     <label>Email: </label>
-                    <input type="email" name="email" id='email' value={user.email} onChange={handleChange} />
+                    <input type="email" name="email" id='email' value={cliente.email} onChange={handleChange} />
                 </div>
                 <div>
                     <label>Senha: </label>
-                    <input type="password" name="senha" id='senha' value={user.senha} onChange={handleChange} />
+                    <input type="password" name="senha" id='senha' value={cliente.senha} onChange={handleChange} />
                 </div>
                 <div className="actions">
                     <button
