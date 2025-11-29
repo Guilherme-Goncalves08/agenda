@@ -19,7 +19,15 @@ class Atendimento {
             },
             concluido: {
                 type: database.db.Sequelize.BOOLEAN
-            }
+            },
+            clienteId: {
+                type: database.db.Sequelize.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'clientes',
+                    key: 'id'
+                }
+            }  
         })
 
         

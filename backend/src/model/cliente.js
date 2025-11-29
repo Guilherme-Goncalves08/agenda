@@ -1,5 +1,5 @@
 import database from "../config/database.js"
-
+import Atendimento from "./atendimento.js";
 class Clientes {
     constructor() {
         this.model = database.db.define('cliente', {
@@ -16,8 +16,11 @@ class Clientes {
             },
             senha: {
                 type: database.db.Sequelize.STRING
-            }
+            },
+            
         })
+        this.model.hasMany(Atendimento, { foreignKey: 'clienteId', onDelete: 'CASCADE' });
+        Atendimento.belongsTo(this.model, { foreignKey: 'clienteId' });
     }
 }
 
